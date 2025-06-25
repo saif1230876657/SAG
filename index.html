@@ -177,17 +177,19 @@
         .products-grid,
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Larger min-width for cards */
-            gap: 2rem; /* Increased gap */
+            /* Updated: Smaller minmax for cards, adjusted gap */
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 1.25rem; 
         }
 
         .product-card,
         .category-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px; /* More rounded corners */
+             /* Updated: Smaller padding and border-radius */
+            padding: 1rem;
+            border-radius: 12px;
             text-align: center;
-            padding: 1.25rem; /* Increased padding */
             box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
@@ -195,7 +197,7 @@
             cursor: pointer;
             transition: var(--transition);
             position: relative;
-            overflow: hidden;
+            overflow: hidden; /* Helps with consistency if content overflows slightly before ellipsis */
         }
 
         .product-card:hover,
@@ -208,25 +210,35 @@
         .product-card img,
         .category-card img {
             width: 100%;
-            height: 160px; /* Increased image height */
+            /* Updated: Reduced image height */
+            height: 130px; 
             object-fit: contain;
-            border-radius: 10px; /* More rounded image corners */
-            margin-bottom: 1rem;
+            border-radius: 8px; /* Slightly less rounded for smaller card */
+            /* Updated: Reduced margin */
+            margin-bottom: 0.75rem; 
             transition: var(--transition);
         }
 
         .category-card img {
-            height: 130px;
-            padding: 10px;
+            height: 110px; /* Adjusted for consistency with product card reduction */
+            padding: 8px;
         }
         
-        .product-card .product-title,
-        .category-card .category-name {
-            margin-top: 0.5rem;
-            font-size: 1rem; /* Slightly larger */
+        /* New wrapper for text content inside product card */
+        .product-card-text-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Allow this section to grow to push button down */
+            justify-content: flex-start; /* Align text to top */
+        }
+
+        .product-card .product-title {
+             /* Updated: Slightly smaller font, adjusted margins */
+            font-size: 0.95rem; 
             color: var(--dark-color);
-            min-height: 2.8em; /* Adjusted min-height */
-            margin-bottom: 0.75rem;
+            min-height: 2.6em; /* Approx 2 lines, adjust based on font and line-height */
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem; /* Space before short description */
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -234,42 +246,64 @@
             -webkit-box-orient: vertical;
             font-weight: 600;
         }
+        
+        /* New: Styles for the short description in product card */
+        .product-card .product-short-description {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            line-height: 1.4;
+            height: 2.8em; /* Max 2 lines (1.4em line-height * 2) */
+            margin-bottom: 0.5rem; /* Space before price */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Limit to 2 lines */
+            -webkit-box-orient: vertical;
+        }
 
         .category-card .category-name {
             min-height: auto;
             margin-bottom: 0;
-            font-size: 1.1rem; /* Larger category names */
+            font-size: 1rem; /* Slightly reduced */
         }
 
         .product-card .product-price {
             color: var(--primary-color);
             font-weight: 700;
-            font-size: 1.2rem; /* Larger price */
-            margin: 0.75rem 0;
+            /* Updated: Reduced font size and margin */
+            font-size: 1.1rem; 
+            margin: 0.5rem 0; 
         }
 
-        .buy-now-btn { /* This class is used by product cards and product details */
-            background-color: var(--success-color); /* Solid success color */
+        .buy-now-btn { 
+            background-color: var(--success-color); 
             color: var(--light-color);
             border: none;
-            padding: 0.75rem 1rem; /* Adjusted padding */
-            border-radius: 10px; /* More rounded */
+            padding: 0.75rem 1rem; 
+            border-radius: 10px; 
             cursor: pointer;
             font-size: 1rem;
-            margin-top: auto;
+            margin-top: auto; /* Pushes button to bottom if card content is short */
             width: 100%;
             font-weight: 600;
             transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px; /* Increased gap */
+            gap: 8px; 
+        }
+        /* Updated: Specific styling for buy button inside product card */
+        .product-card .buy-now-btn {
+            padding: 0.65rem 0.8rem;
+            font-size: 0.9rem;
+            margin-top: 0.5rem; /* Ensure some space above button */
         }
 
+
         .buy-now-btn:hover {
-            background-color: var(--success-dark); /* Darker on hover */
+            background-color: var(--success-dark); 
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 186, 124, 0.3); /* Adjusted shadow for new color */
+            box-shadow: 0 4px 12px rgba(0, 186, 124, 0.3); 
         }
 
         #home-page-header {
@@ -287,7 +321,7 @@
             border-radius: 8px;
             cursor: pointer;
             font-size: 0.95rem;
-            display: none; /* Initially hidden */
+            display: none; 
             transition: var(--transition);
             font-weight: 600;
         }
@@ -306,7 +340,7 @@
             background-color: var(--card-bg);
             display: flex;
             justify-content: space-around;
-            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.08); /* Slightly stronger shadow */
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.08); 
             padding: 0.6rem 0;
             z-index: 1000;
             border-top: 1px solid var(--border-color);
@@ -318,62 +352,62 @@
             align-items: center;
             text-decoration: none;
             color: var(--nav-link-color);
-            padding: 0.5rem 1rem; /* Adjusted padding */
+            padding: 0.5rem 1rem; 
             flex-grow: 1;
             text-align: center;
-            border-radius: 12px; /* More rounded */
+            border-radius: 12px; 
             margin: 0 4px;
             transition: var(--transition);
         }
 
         .nav-link i {
-            font-size: 1.4rem; /* Larger icons */
+            font-size: 1.4rem; 
             margin-bottom: 0.3rem;
             transition: var(--transition);
         }
 
         .nav-link span {
-            font-size: 0.85rem; /* Slightly larger text */
+            font-size: 0.85rem; 
             transition: var(--transition);
         }
 
         .nav-link.active {
             color: var(--primary-color);
-            background: rgba(90, 95, 220, 0.1); /* Lighter active background based on new primary */
+            background: rgba(90, 95, 220, 0.1); 
         }
 
         .nav-link.active i,
         .nav-link.active span {
             color: var(--primary-color);
-            font-weight: 700; /* Bolder active text */
+            font-weight: 700; 
         }
 
         .nav-link:hover:not(.active) {
-            background: rgba(90, 95, 220, 0.07); /* Lighter hover background */
+            background: rgba(90, 95, 220, 0.07); 
             color: var(--primary-dark);
         }
 
         .profile-container {
             text-align: center;
-            padding: 2.5rem; /* Increased padding */
+            padding: 2.5rem; 
             background-color: var(--card-bg);
-            border-radius: 20px; /* More rounded */
+            border-radius: 20px; 
             box-shadow: var(--shadow);
-            max-width: 550px; /* Slightly wider */
+            max-width: 550px; 
             margin: 0 auto;
         }
 
         .profile-pic {
-            width: 130px; /* Larger pic */
+            width: 130px; 
             height: 130px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--primary-color); /* Thicker border with new color */
+            border: 4px solid var(--primary-color); 
             margin-bottom: 1.5rem;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
         }
         
-        #user-name { /* Targeting the user name specifically for styling */
+        #user-name { 
             font-size: 1.6rem;
             color: var(--dark-color);
             font-weight: 700;
@@ -382,7 +416,7 @@
 
         .profile-location {
             color: var(--text-light);
-            font-size: 1rem; /* Slightly larger */
+            font-size: 1rem; 
             margin-top: 0.4rem;
         }
 
@@ -394,12 +428,12 @@
         #user-profile button {
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
             color: var(--light-color);
-            padding: 0.9rem 1.8rem; /* Increased padding */
+            padding: 0.9rem 1.8rem; 
             border: none;
-            border-radius: 10px; /* More rounded */
+            border-radius: 10px; 
             cursor: pointer;
-            font-size: 1.05rem; /* Slightly larger */
-            margin-top: 1.8rem; /* Increased margin */
+            font-size: 1.05rem; 
+            margin-top: 1.8rem; 
             font-weight: 600;
             transition: var(--transition);
             display: inline-block;
@@ -408,16 +442,16 @@
         #guest-profile button:hover,
         #user-profile button:hover {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
-            transform: translateY(-3px); /* More lift */
-            box-shadow: 0 6px 18px rgba(90, 95, 220, 0.35); /* Shadow with new primary color */
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 18px rgba(90, 95, 220, 0.35); 
         }
 
         #user-profile button {
-            margin: 1.2rem 0.6rem 0; /* Adjusted margin */
+            margin: 1.2rem 0.6rem 0; 
         }
 
         #edit-profile-btn i {
-            margin-left: 8px; /* Increased space for icon */
+            margin-left: 8px; 
         }
 
         .modal {
@@ -429,33 +463,33 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.65); /* Darker backdrop */
-            direction: ltr; /* Keep LTR for modal backdrop and positioning */
+            background-color: rgba(0, 0, 0, 0.65); 
+            direction: ltr; 
             padding: 20px;
         }
 
         .modal-content {
             background-color: var(--card-bg);
             margin: 5% auto;
-            padding: 2.5rem; /* Increased padding */
-            border-radius: 18px; /* More rounded */
+            padding: 2.5rem; 
+            border-radius: 18px; 
             width: 90%;
-            max-width: 550px; /* Slightly wider */
-            text-align: right; /* Content aligned to right for RTL */
+            max-width: 550px; 
+            text-align: right; 
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
             animation: modalFade 0.4s ease;
-            direction: rtl; /* Set direction to RTL for modal content */
+            direction: rtl; 
         }
 
         .close-btn,
         .close-edit-btn,
         .close-product-details-btn {
-            color: #999; /* Lighter close icon */
+            color: #999; 
             position: absolute;
-            left: 25px; /* Adjusted position */
+            left: 25px; 
             top: 20px;
-            font-size: 2rem; /* Larger icon */
+            font-size: 2rem; 
             font-weight: bold;
             line-height: 1;
             cursor: pointer;
@@ -468,15 +502,15 @@
         .close-edit-btn:focus,
         .close-product-details-btn:hover,
         .close-product-details-btn:focus {
-            color: var(--danger-color); /* Red on hover for close */
+            color: var(--danger-color); 
             transform: scale(1.15);
         }
 
         .modal-content h2 {
             text-align: center;
-            margin-bottom: 2rem; /* Increased margin */
-            color: var(--primary-dark); /* Use new primary color */
-            font-size: 1.9rem; /* Larger modal titles */
+            margin-bottom: 2rem; 
+            color: var(--primary-dark); 
+            font-size: 1.9rem; 
             font-weight: 700;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--primary-color);
@@ -487,7 +521,7 @@
             display: block;
             margin-bottom: 0.6rem;
             text-align: right;
-            font-size: 1rem; /* Slightly larger */
+            font-size: 1rem; 
             font-weight: 600;
             color: var(--dark-color);
         }
@@ -497,14 +531,14 @@
         #edit-profile-form input,
         #edit-profile-form textarea {
             width: 100%;
-            padding: 1rem; /* Increased padding */
-            margin-bottom: 1.5rem; /* Increased margin */
+            padding: 1rem; 
+            margin-bottom: 1.5rem; 
             border: 1px solid var(--border-color);
-            border-radius: 10px; /* More rounded */
+            border-radius: 10px; 
             box-sizing: border-box;
             font-size: 1rem;
             transition: var(--transition);
-            background-color: var(--body-bg); /* Match body bg */
+            background-color: var(--body-bg); 
         }
 
         #register-form input:focus,
@@ -513,11 +547,11 @@
         #edit-profile-form textarea:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(90, 95, 220, 0.2); /* Focus shadow with new primary color */
+            box-shadow: 0 0 0 4px rgba(90, 95, 220, 0.2); 
         }
 
         #register-form button,
-        #edit-profile-form button { /* Submit buttons in modals */
+        #edit-profile-form button { 
             width: 100%;
             padding: 1rem;
             background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
@@ -525,7 +559,7 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            font-size: 1.15rem; /* Larger text */
+            font-size: 1.15rem; 
             font-weight: 600;
             transition: var(--transition);
             margin-top: 0.8rem;
@@ -535,27 +569,26 @@
         #edit-profile-form button:hover {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
             transform: translateY(-3px);
-            box-shadow: 0 6px 18px rgba(90, 95, 220, 0.35); /* Shadow with new primary color */
+            box-shadow: 0 6px 18px rgba(90, 95, 220, 0.35); 
         }
         
-        /* Product Details Modal Specifics */
         #product-details-modal .modal-content {
-            max-width: 700px; /* Wider modal for product details */
+            max-width: 700px; 
             padding: 2rem;
         }
 
         #product-details-images {
             display: flex;
             overflow-x: auto;
-            gap: 15px; /* Increased gap */
+            gap: 15px; 
             margin-bottom: 2rem;
-            padding-bottom: 15px; /* Space for scrollbar */
+            padding-bottom: 15px; 
             scrollbar-width: thin;
-            scrollbar-color: var(--primary-color) var(--body-bg); /* Styled scrollbar */
+            scrollbar-color: var(--primary-color) var(--body-bg); 
         }
 
         #product-details-images::-webkit-scrollbar {
-            height: 8px; /* Thicker scrollbar */
+            height: 8px; 
         }
         #product-details-images::-webkit-scrollbar-track {
             background: var(--body-bg);
@@ -570,14 +603,14 @@
         }
 
         #product-details-images img {
-            max-height: 110px; /* Slightly larger thumbnails */
+            max-height: 110px; 
             width: auto;
             border-radius: 10px;
-            border: 2px solid var(--border-color); /* Default border */
+            border: 2px solid var(--border-color); 
             cursor: pointer;
             transition: var(--transition);
             flex-shrink: 0;
-            padding: 3px; /* Small padding inside border */
+            padding: 3px; 
             background-color: var(--card-bg);
         }
 
@@ -586,43 +619,43 @@
             transform: scale(1.03);
         }
 
-        #product-details-images img.active { /* Enhanced active state */
+        #product-details-images img.active { 
             border: 3px solid var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(90, 95, 220, 0.3), var(--shadow-hover); /* Outer glow and shadow */
-            transform: scale(1.08); /* More pronounced scale */
+            box-shadow: 0 0 0 3px rgba(90, 95, 220, 0.3), var(--shadow-hover); 
+            transform: scale(1.08); 
         }
 
         #product-details-main-image {
-            width: 100%; /* Ensure it takes full width available */
-            max-height: 400px; /* Increased max height */
+            width: 100%; 
+            max-height: 400px; 
             display: block;
             margin: 0 auto 2rem;
             border-radius: 12px;
             border: 1px solid var(--border-color);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); 
             object-fit: contain;
         }
 
-        #product-details-title { /* This is an h2 inside modal, restyle for this context */
-            font-size: 2rem; /* Larger product title */
+        #product-details-title { 
+            font-size: 2rem; 
             margin-bottom: 1rem;
             color: var(--dark-color);
             font-weight: 700;
-            text-align: right; /* Ensure RTL alignment */
-            border-bottom: none; /* Remove duplicate border if modal-content h2 has one */
+            text-align: right; 
+            border-bottom: none; 
             padding-bottom: 0;
         }
 
         #product-details-description {
-            font-size: 1.1rem; /* Larger description text */
+            font-size: 1.1rem; 
             margin-bottom: 1.8rem;
             white-space: pre-wrap;
             color: var(--text-light);
-            line-height: 1.8; /* More line height for readability */
+            line-height: 1.8; 
         }
 
         #product-details-price {
-            font-size: 1.8rem; /* Larger price display */
+            font-size: 1.8rem; 
             font-weight: 800;
             color: var(--primary-color);
             margin-bottom: 1.8rem;
@@ -632,18 +665,18 @@
             margin-bottom: 1.8rem;
             display: flex;
             align-items: center;
-            gap: 15px; /* Increased gap */
+            gap: 15px; 
         }
 
         #product-details-quantity-selector label {
-            margin-right: 10px; /* For RTL */
+            margin-right: 10px; 
             font-weight: 600;
             font-size: 1.05rem;
         }
 
         #product-details-quantity-selector input[type="number"] {
-            width: 90px; /* Wider input */
-            padding: 0.8rem; /* Increased padding */
+            width: 90px; 
+            padding: 0.8rem; 
             text-align: center;
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -655,15 +688,14 @@
              box-shadow: 0 0 0 3px rgba(90, 95, 220, 0.2);
         }
 
-        #product-details-buy-btn { /* Uses .buy-now-btn styles but can be overridden */
+        #product-details-buy-btn { 
             width: 100%;
-            padding: 1.1rem; /* Larger padding */
-            font-size: 1.15rem; /* Larger font */
+            padding: 1.1rem; 
+            font-size: 1.15rem; 
             font-weight: 700;
             border-radius: 12px;
         }
 
-        /* My Orders Page Styles */
         #my-orders-page ul {
             list-style: none;
             padding: 0;
@@ -672,27 +704,27 @@
         #my-orders-page li {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 1.5rem; /* Increased padding */
-            margin-bottom: 1.2rem; /* Increased margin */
-            border-radius: 16px; /* More rounded */
+            padding: 1.5rem; 
+            margin-bottom: 1.2rem; 
+            border-radius: 16px; 
             box-shadow: var(--shadow);
             display: flex;
             align-items: flex-start;
-            gap: 20px; /* Increased gap */
+            gap: 20px; 
             transition: var(--transition);
         }
 
         #my-orders-page li:hover {
-            transform: translateY(-5px); /* More lift */
+            transform: translateY(-5px); 
             box-shadow: var(--shadow-hover);
             border-color: var(--primary-light);
         }
 
         #my-orders-page li img {
-            width: 80px; /* Larger image */
+            width: 80px; 
             height: 80px;
             object-fit: cover;
-            border-radius: 10px; /* More rounded */
+            border-radius: 10px; 
             flex-shrink: 0;
             border: 1px solid var(--border-color);
         }
@@ -702,8 +734,8 @@
         }
 
         #my-orders-page li .order-info p {
-            margin: 0.5rem 0; /* Adjusted margin */
-            font-size: 1rem; /* Slightly larger */
+            margin: 0.5rem 0; 
+            font-size: 1rem; 
         }
         #my-orders-page li .order-info p strong {
             color: var(--dark-color);
@@ -713,7 +745,7 @@
             background: var(--danger-color);
             color: var(--light-color);
             border: none;
-            padding: 0.7rem 1.2rem; /* Adjusted padding */
+            padding: 0.7rem 1.2rem; 
             border-radius: 8px;
             cursor: pointer;
             font-size: 0.95rem;
@@ -726,15 +758,15 @@
         }
 
         .cancel-order-btn:hover {
-            background: #d32f2f; /* Darker red on hover */
+            background: #d32f2f; 
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(244, 67, 54, 0.3);
         }
 
         .status-message {
             font-weight: 700;
-            padding: 0.5rem 1rem; /* Increased padding */
-            border-radius: 8px; /* More rounded */
+            padding: 0.5rem 1rem; 
+            border-radius: 8px; 
             display: inline-block;
             margin-top: 0.6rem;
             font-size: 0.95rem;
@@ -743,36 +775,35 @@
         }
 
         .status-قيد-المراجعة {
-            color: var(--warning-color); /* Using the new warning color variable */
-            background-color: rgba(255, 193, 7, 0.1); /* Lighter version of warning */
+            color: var(--warning-color); 
+            background-color: rgba(255, 193, 7, 0.1); 
             border-color: var(--warning-color);
         }
 
         .status-تم-الموافقة, .status-تم-التسليم {
             color: var(--success-color);
-            background-color: rgba(0, 186, 124, 0.1); /* Lighter version of success */
+            background-color: rgba(0, 186, 124, 0.1); 
             border-color: var(--success-color);
         }
 
         .status-تم-الرفض, .status-ملغى-من-قبل-المستخدم, .status-ملغى-من-الإدارة {
             color: var(--danger-color);
-            background-color: rgba(244, 67, 54, 0.1); /* Lighter version of danger */
+            background-color: rgba(244, 67, 54, 0.1); 
             border-color: var(--danger-color);
         }
 
         .status-تم-الشحن {
             color: var(--info-color);
-            background-color: rgba(3, 169, 244, 0.1); /* Lighter version of info */
+            background-color: rgba(3, 169, 244, 0.1); 
             border-color: var(--info-color);
         }
 
         .status-حالة-غير-معروفة {
             color: var(--secondary-color);
             border-color: var(--secondary-color);
-            background-color: rgba(108, 117, 125, 0.1); /* Lighter version of secondary */
+            background-color: rgba(108, 117, 125, 0.1); 
         }
 
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
@@ -783,10 +814,11 @@
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* Responsive Design Adjustments */
         @media (max-width: 992px) {
-            .products-grid, .categories-grid {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            /* products-grid already updated, this keeps consistency if category-grid was separate */
+            .categories-grid { 
+                grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+                gap: 1.25rem;
             }
              html { font-size: 15px; }
         }
@@ -795,14 +827,18 @@
             .site-name { font-size: 1.6rem; }
             .search-container input[type="search"] { padding: 0.8rem 1rem; }
             .search-container button { padding: 0.8rem 1.2rem; }
-            .product-card img, .category-card img { height: 140px; }
+            /* product-card img height already reduced, this applies to category cards too */
+            .category-card img { height: 120px; } 
             .profile-container { padding: 2rem; }
             #product-details-modal .modal-content { padding: 1.5rem; max-width: 90%; }
             .page h2 { font-size: 1.6rem; }
+            /* products-grid and categories-grid minmax will adapt, this ensures consistency if needed */
             .products-grid, .categories-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 1.5rem;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Further reduce for tablets */
+                gap: 1rem;
             }
+            .product-card img { height: 120px; } /* Match responsive */
+
         }
 
         @media (max-width: 576px) {
@@ -811,12 +847,19 @@
             .site-name { font-size: 1.4rem; letter-spacing: 0.2px; }
             .page h2 { font-size: 1.4rem; margin-bottom: 1.5rem; }
             .products-grid, .categories-grid {
-                grid-template-columns: repeat(2, 1fr); /* Simpler 2-column layout for small screens */
+                 /* Updated: use minmax for 2 columns or adapt, instead of fixed 2fr */
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
                 gap: 1rem;
             }
-            .product-card, .category-card { padding: 1rem; border-radius: 12px; }
-            .product-card img, .category-card img { height: 120px; }
-            .buy-now-btn { padding: 0.7rem; font-size: 0.9rem; }
+            .product-card, .category-card { padding: 0.8rem; border-radius: 10px; } /* Adjusted padding */
+            .product-card img, .category-card img { height: 110px; } /* Adjusted height */
+            
+            .product-card .product-title { font-size: 0.9rem; min-height: 2.4em; }
+            .product-card .product-short-description { font-size: 0.75rem; height: 2.6em; margin-bottom: 0.3rem;}
+            .product-card .product-price { font-size: 1rem; }
+            .product-card .buy-now-btn { padding: 0.6rem; font-size: 0.85rem; }
+
+
             .modal-content { padding: 1.5rem 1.2rem; border-radius: 12px; }
             #product-details-modal .modal-content { max-width: 95%; }
             
@@ -831,7 +874,7 @@
             #my-orders-page li img {
                 width: 100%;
                 height: auto;
-                max-height: 180px; /* Constrain image height */
+                max-height: 180px; 
                 margin-bottom: 1rem;
             }
             .search-container input[type="search"] { font-size: 0.9rem; }
@@ -881,7 +924,7 @@
                     <button id="show-register-form-btn">سجل الآن</button>
                 </div>
                 <div id="user-profile" class="hidden">
-                    <img src="https://i.postimg.cc/cCZDj6LL/1000124944.png" alt="صورة الملف الشخصي" class="profile-pic" id="user-profile-pic-display"> <!-- Added id for potential dynamic image update -->
+                    <img src="https://i.postimg.cc/cCZDj6LL/1000124944.png" alt="صورة الملف الشخصي" class="profile-pic" id="user-profile-pic-display"> 
                     <h3 id="user-name">اسم المستخدم الثلاثي</h3>
                     <p id="user-governorate" class="profile-location">المحافظة</p>
                     <p id="user-city" class="profile-location">المدينة</p>
@@ -945,9 +988,8 @@
             <span class="close-product-details-btn">×</span>
             <img id="product-details-main-image" src="" alt="صورة المنتج الرئيسية">
             <div id="product-details-images">
-                <!-- Thumbnails will be populated here by JS -->
             </div>
-            <h2 id="product-details-title">اسم المنتج هنا</h2> <!-- Matches modal-content h2 styling -->
+            <h2 id="product-details-title">اسم المنتج هنا</h2> 
             <p id="product-details-description">وصف مفصل للمنتج...</p>
             <p id="product-details-price">السعر: 00.00 ج.م</p>
             <div id="product-details-quantity-selector" class="hidden">
@@ -962,14 +1004,13 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
         import { getFirestore, collection, getDocs, doc, setDoc, getDoc, updateDoc, addDoc, query, where, serverTimestamp, orderBy } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
 
-        // IMPORTANT: Replace with your actual Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyAjE-2q6PONBkCin9ZN22gDp9Q8pAH9ZW8", // Replace
-            authDomain: "story-97cf7.firebaseapp.com", // Replace
-            projectId: "story-97cf7", // Replace
-            storageBucket: "story-97cf7.appspot.com", // Replace
-            messagingSenderId: "742801388214", // Replace
-            appId: "1:742801388214:web:32a305a8057b0582c5ec17", // Replace
+            apiKey: "AIzaSyAjE-2q6PONBkCin9ZN22gDp9Q8pAH9ZW8", 
+            authDomain: "story-97cf7.firebaseapp.com", 
+            projectId: "story-97cf7", 
+            storageBucket: "story-97cf7.appspot.com", 
+            messagingSenderId: "742801388214", 
+            appId: "1:742801388214:web:32a305a8057b0582c5ec17", 
         };
 
         const app = initializeApp(firebaseConfig);
@@ -1000,15 +1041,14 @@
                 if (targetPage) {
                     targetPage.classList.add('active');
                     if (pageId === 'home-page' && homePageTitle.textContent !== 'المنتجات') {
-                         displayProducts(); // Reset to all products if navigating to home and a category was shown
+                         displayProducts(); 
                     } else if (pageId === 'categories-page') {
                         displayCategories();
                     } else if (pageId === 'my-orders-page') {
                         loadUserOrders(); 
                     }
-                    // Profile page updates automatically via updateProfileView on load / auth change
                 }
-                window.scrollTo(0, 0); // Scroll to top on page change
+                window.scrollTo(0, 0); 
             });
         });
 
@@ -1045,15 +1085,18 @@
                 productSnapshot.forEach(docSnap => {
                     const product = docSnap.data();
                     const productId = docSnap.id;
-                    const mainImageUrl = (Array.isArray(product.imageUrls) && product.imageUrls.length > 0) ? product.imageUrls[0] : 'https://via.placeholder.com/200x160.png?text=No+Image';
+                    const mainImageUrl = (Array.isArray(product.imageUrls) && product.imageUrls.length > 0) ? product.imageUrls[0] : 'https://via.placeholder.com/170x130.png?text=No+Image';
                     const productTitleSafe = product.title || 'عنوان المنتج';
                     const productPrice = product.price ? `${parseFloat(product.price).toLocaleString('ar-EG', { style: 'currency', currency: 'EGP' })}` : 'السعر غير محدد';
-                    
+                    // Updated: Get product description for the card
+                    const productDescriptionShort = product.description || ''; // Pass the full or a relevant part; CSS will truncate
+
                     productsHTML += `
                         <div class="product-card" data-product-id="${productId}">
                             <img src="${mainImageUrl}" alt="${productTitleSafe}">
-                            <div style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;"> <!-- Wrapper for title and price -->
+                            <div class="product-card-text-content">
                                 <p class="product-title">${productTitleSafe}</p>
+                                <p class="product-short-description">${productDescriptionShort}</p>
                                 <p class="product-price">${productPrice}</p>
                             </div>
                             <button class="buy-now-btn product-card-buy-btn" 
@@ -1078,12 +1121,9 @@
         }
         
         showAllProductsBtn.addEventListener('click', () => {
-            displayProducts(); // Display all products
-            // Ensure the home tab is active
+            displayProducts(); 
             navLinks.forEach(l => l.classList.remove('active'));
             document.querySelector('.nav-link[data-page="home-page"]')?.classList.add('active');
-            
-            // Ensure the home page section is active (though displayProducts should handle its content)
             pages.forEach(p => p.classList.remove('active'));
             document.getElementById('home-page').classList.add('active');
         });
@@ -1105,7 +1145,7 @@
                 categorySnapshot.forEach(docSnap => {
                     const category = docSnap.data();
                     const categoryId = docSnap.id;
-                    const imageUrl = category.imageUrl || 'https://via.placeholder.com/200x130.png?text=فئة';
+                    const imageUrl = category.imageUrl || 'https://via.placeholder.com/170x110.png?text=فئة';
                     const categoryNameSafe = category.name || 'اسم الفئة';
 
                     categoriesHTML += `
@@ -1120,14 +1160,10 @@
                     card.addEventListener('click', () => {
                         const catId = card.dataset.categoryId;
                         const catName = card.dataset.categoryName;
-                        
-                        // Switch to home page view to display products of this category
                         navLinks.forEach(l => l.classList.remove('active'));
                         document.querySelector('.nav-link[data-page="home-page"]')?.classList.add('active');
-                        
                         pages.forEach(p => p.classList.remove('active'));
                         document.getElementById('home-page').classList.add('active');
-                        
                         displayProducts(catId, catName);
                     });
                 });
@@ -1141,7 +1177,6 @@
         function attachProductCardListeners() {
             document.querySelectorAll('.product-card').forEach(card => {
                  card.addEventListener('click', (event) => {
-                    // Prevent opening details if the buy button or its child icon was clicked
                     if (event.target.classList.contains('product-card-buy-btn') || event.target.closest('.product-card-buy-btn')) {
                         return; 
                     }
@@ -1162,12 +1197,12 @@
                 const imagesContainer = document.getElementById('product-details-images');
                 
                 const defaultImgUrl = 'https://via.placeholder.com/400x400.png?text=Product';
-                mainImageEl.src = defaultImgUrl; // Set default first
+                mainImageEl.src = defaultImgUrl; 
                 
                 imagesContainer.innerHTML = ''; 
 
                 if (Array.isArray(product.imageUrls) && product.imageUrls.length > 0) {
-                    mainImageEl.src = product.imageUrls[0]; // Set main image to the first one
+                    mainImageEl.src = product.imageUrls[0]; 
                     product.imageUrls.forEach((url, index) => {
                         const img = document.createElement('img');
                         img.src = url; 
@@ -1181,7 +1216,7 @@
                         imagesContainer.appendChild(img);
                     });
                 } else {
-                     mainImageEl.src = defaultImgUrl; // Fallback if no images
+                     mainImageEl.src = defaultImgUrl; 
                 }
 
                 document.getElementById('product-details-title').textContent = product.title || 'لا يوجد عنوان للمنتج';
@@ -1211,14 +1246,13 @@
 
         document.querySelector('.close-product-details-btn').addEventListener('click', () => productDetailsModalEl.style.display = 'none');
         
-        // Listener for quantity change in product details modal
         const quantityInputDetails = document.getElementById('quantity');
         if (quantityInputDetails) {
             quantityInputDetails.addEventListener('change', () => {
                 const buyBtnDetails = document.getElementById('product-details-buy-btn');
                 buyBtnDetails.textContent = `شراء الآن (الكمية: ${quantityInputDetails.value})`;
             });
-            quantityInputDetails.addEventListener('input', () => { // For immediate feedback
+            quantityInputDetails.addEventListener('input', () => { 
                  const buyBtnDetails = document.getElementById('product-details-buy-btn');
                 buyBtnDetails.textContent = `شراء الآن (الكمية: ${quantityInputDetails.value})`;
             });
@@ -1226,12 +1260,11 @@
 
         function attachBuyNowListeners(selector) {
             document.querySelectorAll(selector).forEach(button => {
-                // Remove old listeners to prevent multiple fires
                 const newButton = button.cloneNode(true);
                 button.parentNode.replaceChild(newButton, button);
 
                 newButton.addEventListener('click', async (event) => {
-                    event.stopPropagation(); // Prevent card click when button on card is clicked
+                    event.stopPropagation(); 
                     const userPhone = localStorage.getItem('userPhone');
                     if (!userPhone) { alert('يجب تسجيل الدخول أولاً لإتمام عملية الشراء.'); registerModalEl.style.display = 'block'; return; }
                     
@@ -1240,7 +1273,7 @@
                     const productImage = newButton.dataset.productImage;
                     
                     let quantity = 1;
-                    if (selector === '#product-details-buy-btn') { // Check if it's the details modal button
+                    if (selector === '#product-details-buy-btn') { 
                         const quantityInput = document.getElementById('quantity');
                         if (quantityInput) quantity = parseInt(quantityInput.value, 10);
                         if (isNaN(quantity) || quantity < 1) quantity = 1;
@@ -1284,7 +1317,6 @@
                         alert(`تم إرسال طلبك للمنتج: ${productTitle} بنجاح! سيتم التواصل معك قريباً.`);
                         if (productDetailsModalEl.style.display === 'block') productDetailsModalEl.style.display = 'none'; 
                         
-                        // Navigate to "My Orders" page
                         const myOrdersLink = document.querySelector('.nav-link[data-page="my-orders-page"]');
                         if (myOrdersLink) myOrdersLink.click();
 
@@ -1292,7 +1324,7 @@
                 });
             });
         }
-        attachBuyNowListeners('#product-details-buy-btn'); // Initialize for the modal button specifically
+        attachBuyNowListeners('#product-details-buy-btn'); 
 
         async function loadUserOrders() {
             const userPhone = localStorage.getItem('userPhone');
@@ -1335,7 +1367,7 @@
                     const productImageUrlSafe = order.productImageUrl || 'https://via.placeholder.com/80.png?text=Order';
                     const quantity = order.quantity || 1;
                     const currentStatus = order.status || 'حالة غير معروفة';
-                    const statusClass = `status-${currentStatus.toLowerCase().replace(/[^\w-]+/g, '-')}`; // Sanitize class name
+                    const statusClass = `status-${currentStatus.toLowerCase().replace(/[^\w-]+/g, '-')}`; 
                     
                     const orderDateFormatted = (order.orderDate && typeof order.orderDate.toDate === 'function')
                         ? order.orderDate.toDate().toLocaleDateString('ar-EG', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })
@@ -1362,17 +1394,16 @@
                 html += '</ul>';
                 ordersListContainer.innerHTML = html;
 
-                // Re-attach listeners for cancel buttons
                 document.querySelectorAll('.cancel-order-btn').forEach(btn => {
-                    const newBtn = btn.cloneNode(true); // Clone to ensure old listeners are removed
+                    const newBtn = btn.cloneNode(true); 
                     btn.parentNode.replaceChild(newBtn, btn);
                     newBtn.addEventListener('click', async (e) => {
-                        const orderIdToCancel = e.target.closest('.cancel-order-btn').dataset.orderId; // Ensure correct target
+                        const orderIdToCancel = e.target.closest('.cancel-order-btn').dataset.orderId; 
                         if (!confirm('هل أنت متأكد من إلغاء هذا الطلب؟')) return;
                         try {
                             await updateDoc(doc(db, 'orders', orderIdToCancel), { status: 'ملغى من قبل المستخدم' });
                             alert('تم إلغاء الطلب بنجاح.');
-                            loadUserOrders(); // Refresh orders list
+                            loadUserOrders(); 
                         } catch (err) { 
                             console.error("Error cancelling order: ", err); 
                             alert('حدث خطأ أثناء محاولة إلغاء الطلب.'); 
@@ -1389,7 +1420,6 @@
             }
         }
 
-        // --- User Authentication and Profile ---
         document.getElementById('show-register-form-btn')?.addEventListener('click', () => registerModalEl.style.display = 'block');
         registerModalEl.querySelector('.close-btn')?.addEventListener('click', () => registerModalEl.style.display = 'none');
         document.getElementById('register-form')?.addEventListener('submit', async (e) => {
@@ -1407,9 +1437,9 @@
                 await setDoc(doc(db, 'users', phone), { name, phone, governorate, city, details, createdAt: serverTimestamp(), profilePicUrl: defaultProfilePic });
                 alert('تم التسجيل بنجاح! يمكنك الآن تسجيل الدخول.');
                 registerModalEl.style.display = 'none';
-                localStorage.setItem('userPhone', phone); // Automatically "log in"
+                localStorage.setItem('userPhone', phone); 
                 updateProfileView();
-                document.querySelector('.nav-link[data-page="profile-page"]')?.click(); // Switch to profile page
+                document.querySelector('.nav-link[data-page="profile-page"]')?.click(); 
             } catch (error) { console.error("Error during registration: ", error); alert('خطأ في التسجيل. يرجى المحاولة مرة أخرى.'); }
         });
 
@@ -1454,7 +1484,7 @@
             localStorage.removeItem('userPhone');
             updateProfileView(); 
             alert('تم تسجيل الخروج بنجاح.');
-            document.querySelector('.nav-link[data-page="home-page"]')?.click(); // Go to home page
+            document.querySelector('.nav-link[data-page="home-page"]')?.click(); 
         });
         
         document.getElementById('edit-profile-btn')?.addEventListener('click', async () => {
@@ -1465,7 +1495,7 @@
                 if (userSnap.exists()) {
                     const ud = userSnap.data();
                     document.getElementById('edit-name').value = ud.name || '';
-                    document.getElementById('edit-phone').value = ud.phone || ''; // Phone is readonly
+                    document.getElementById('edit-phone').value = ud.phone || ''; 
                     document.getElementById('edit-governorate').value = ud.governorate || '';
                     document.getElementById('edit-city').value = ud.city || '';
                     document.getElementById('edit-details').value = ud.details || '';
@@ -1490,40 +1520,35 @@
                 governorate: governorate,
                 city: city,
                 details: document.getElementById('edit-details').value.trim(),
-                // profilePicUrl: can be added here if you implement image upload for profile
             };
             try {
                 await updateDoc(doc(db, 'users', userPhone), updatedData);
                 alert('تم تحديث الملف الشخصي بنجاح!');
                 editProfileModalEl.style.display = 'none'; 
-                updateProfileView(); // Refresh profile display
+                updateProfileView(); 
             } catch (error) { console.error("Error updating profile: ", error); alert('خطأ في تحديث الملف الشخصي.'); }
         });
 
-        // Close modals if clicked outside content
         window.addEventListener('click', (event) => {
             if (event.target == registerModalEl) registerModalEl.style.display = "none";
             if (event.target == editProfileModalEl) editProfileModalEl.style.display = "none";
             if (event.target == productDetailsModalEl) productDetailsModalEl.style.display = "none";
         });
 
-        // Initialize view on load
         function initializeAppView() {
             updateProfileView(); 
-            displayProducts(); // Load initial products
+            displayProducts(); 
             
-            // Set the active page based on the .active class on nav-link (default is home)
             const initialActiveLink = document.querySelector('.nav-link.active');
             let initialPageId = 'home-page'; 
             if (initialActiveLink) {
                 initialPageId = initialActiveLink.getAttribute('data-page');
             }
             
-            pages.forEach(p => p.classList.remove('active')); // Deactivate all
+            pages.forEach(p => p.classList.remove('active')); 
             const pageToActivate = document.getElementById(initialPageId);
-            if (pageToActivate) pageToActivate.classList.add('active'); // Activate initial
+            if (pageToActivate) pageToActivate.classList.add('active'); 
 
-            // Load content for specific pages if they are initially active
             if (initialPageId === 'categories-page') {
                 displayCategories();
             } else if (initialPageId === 'my-orders-page') {
@@ -1534,4 +1559,4 @@
 
     </script>
 </body>
-</html> 
+</html>
